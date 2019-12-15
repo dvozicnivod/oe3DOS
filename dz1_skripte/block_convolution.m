@@ -1,8 +1,8 @@
 function y = block_convolution(x, h, block_length)
 %%  block_convolution 
-%@brief:        ra?una blok konvoluciju signala
-%               x i h u zadatoj veli?ini bloka
-%               ***sta se desava***
+%@brief:        racuna konvoluciju signala x i h u zadatoj velicini deleci
+%               ulazni vekor na blokove cija je velicina zadata
+%              
 %@input params: x, h - vektorski signali 
 %               block_lenght - brojna vrednost, velicina bloka
 %@output param: y - vektorski signal koji prestavlja blok konvoluciju x i h
