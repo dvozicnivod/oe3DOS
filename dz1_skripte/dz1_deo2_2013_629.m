@@ -6,7 +6,6 @@ clc
 %%
 %tacka 1 - pogledati fajl block_convolution.m
 
-pause
 %%
 %tacka 2
 
@@ -34,10 +33,10 @@ ws = hamming(window_width);
 
 %racunanje spektrograma
 [B,frequencies,times] = spectrogram(x, ws, overlap_num, nfft, fs);
-B_dB = 20*log10(abs(B));        %u dB
+B_dB = 20*log10(abs(B));       
 
 % prikaz spektrograma orginalnog signala
-figure
+figure('NumberTitle', 'off', 'Name', 'spekogrami ulaznog i izlaznog signala');
 subplot(1,2,1);
 imagesc(times, frequencies(1:end), B_dB(1:end,:));
 axis('xy');
@@ -47,7 +46,7 @@ title(['Spektrogram za T = ' num2str(1000*window_width/fs) ' ms']);
 
 %racunanje spektrograma konvolucije
 [B,frequencies,times] = spectrogram(bconv, ws, overlap_num, nfft, fs);
-B_dB = 20*log10(abs(B)); %u dB
+B_dB = 20*log10(abs(B));
 
 % prikaz spektrograma konvolucije
 subplot(1,2,2);

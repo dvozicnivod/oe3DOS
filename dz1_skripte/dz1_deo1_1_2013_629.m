@@ -28,8 +28,9 @@ n2 = 0:N2-1;
 n3 = 0:N3-1;
 
 %semplovani signali
+figure('NumberTitle', 'off', 'Name', 'semplovani signal x[n]');
+
 x1 = cos(2*pi*f1*t1) + 0.5*cos(2*pi*f2*t1)+3*cos(2*pi*f3*t1);
-figure('NumberTitle', 'off', 'Name', 'semplovani signal x(t)');
 subplot(3,1,1);
 plot(t1,x1), axis('xy'), ylabel('amplituda [V]'), xlabel (' vreme [s]' ), title('N1 = 32'), xlim([0 t1(end)]);
 
@@ -83,12 +84,12 @@ dominantComp1 = freqs1(locs1);
 dominantComp2 = freqs2(locs2);
 dominantComp3 = freqs3(locs3);
 
-%greska
+%greske
 %prvi spektar prepoznaje samo jednu dominantnu komponentu
 error2 = dominantComp2 - [7,1,3];       %pikove nalazi u fiksnom rasporedu
 error3 = dominantComp3 - [7,1,3];       %i ja to koristim bestidno
 
-%plotovanje (ESTETIKA APSOLUTNI PRIORITET xD)
+%plotovanje gresaka(ESTETIKA APSOLUTNI PRIORITET)
 figure('NumberTitle', 'off', 'Name', 'dominantne komponente i greske');
 subplot(3,2,1), title('X1 komponente');
 text(0.1,0.5, num2str(dominantComp1)), axis off;
@@ -107,7 +108,7 @@ pause
 %%
 %tacka 3
 %@brief: zahtev da prozorska funkcija ima odbirke koji na krajevima 
-%        opadaju do nule pruza izbor od mnogo funkcija, odlucio sam se za
+%        opadaju do nule pruza veliki izbor funkcija, odlucio sam se za
 %        Blackman-ovu prozorsku funkciju
 
 %generisanje prozorskih f-ja
@@ -115,13 +116,13 @@ blackWindow1 = blackman(N1);
 blackWindow2 = blackman(N2);
 blackWindow3 = blackman(N3);
 
-%primenjivanje, ista imena promenljivih radi code reusablity
+%primena prozorskih fja, ista imena promenljivih radi code reusablity
 x1 = x1 .* blackWindow1';
 x2 = x2 .* blackWindow2';
 x3 = x3 .* blackWindow3';
 
 %signali
-figure('NumberTitle', 'off', 'Name', 'novi signal x(t)');
+figure('NumberTitle', 'off', 'Name', 'novi signal x[n]');
 subplot(3,1,1);
 plot(t1,x1), axis('xy'), ylabel('amplituda [V]'), xlabel (' vreme [s]' ), title('N1 = 32'), xlim([0 t1(end)]);
 subplot(3,1,2);
@@ -161,6 +162,7 @@ stem(freqs3,abs(X3fft)),xlabel('ucestanost [Hz]'),ylabel('|X3(k)|'),title('FFT X
 pause
 %%
 %tacka 4
+
 %tri najvece frekvencijske komponente i njihove lokacije
 [pks1, locs1] = findpeaks(abs(X1fft),'SortStr','descend','NPeaks',3);
 [pks2, locs2] = findpeaks(abs(X2fft),'SortStr','descend','NPeaks',3);
@@ -175,7 +177,7 @@ dominantComp3 = freqs3(locs3);
 error2 = dominantComp2 - [7,1,3];
 error3 = dominantComp3 - [7,1,3];
 
-%plotovanje (ESTETIKA APSOLUTNI PRIORITET xD)
+%plotovanje
 figure('NumberTitle', 'off', 'Name', 'dominantne komponente i greske');
 subplot(3,2,1), title('X1 komponente');
 text(0.1,0.5, num2str(dominantComp1)), axis off;
